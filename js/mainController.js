@@ -9,7 +9,6 @@ let STAR_DISTANCE_FROM_STAR;
 let gCurrMousePos = { x: 0, y: 0 }
 let gIsMouseOverCanvas = false;
 let gTouchPositions = null;
-let gIsTouchStart = false;
 
 window.addEventListener('load', init);
 
@@ -20,6 +19,7 @@ function init() {
   initStars(STAR_COUNT, createCanvasDim());
   startRendering();
 }
+
 function addEventListeners() {
   gCanvasEl.addEventListener('mousemove', onMouseMoveHandler);
   gCanvasEl.addEventListener('mouseenter', (ev) => {
@@ -67,8 +67,14 @@ function resizeCanvas() {
   gCanvasEl.width = ccEl.offsetWidth;
   gCanvasEl.height = ccEl.offsetHeight;
 
-  STAR_DISTANCE_FROM_MOUSE = ccEl.offsetWidth / 5;
-  STAR_DISTANCE_FROM_STAR = ccEl.offsetHeight / 5;
+  STAR_DISTANCE_FROM_MOUSE = ccEl.offsetWidth / 3;
+  STAR_DISTANCE_FROM_STAR = ccEl.offsetHeight / 9;
+
+  // bigger screens - bigger distance
+  if (ccEl.offsetWidth > 600 && ccEl.offsetHeight > 600) {
+    STAR_DISTANCE_FROM_MOUSE = 170;
+    STAR_DISTANCE_FROM_STAR = 80;
+  }
 }
 
 function createCanvasDim() {
@@ -87,7 +93,7 @@ function startRendering() {
 }
 function clearCanvas() {
   const { width, height } = gCanvasEl;
-  gCtx.fillStyle = "rgb(0,0,0)";
+  gCtx.fillStyle = "#000000";
   gCtx.fillRect(0, 0, width, height);
 }
 
