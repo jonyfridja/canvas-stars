@@ -68,7 +68,7 @@ function renderStarLines() {
 }
 function drawLineBetweenStars(star1, star2) {
   const starsDistance = star1.distance(star2.pos);
-  // if (starsDistance > STAR_DISTANCE_FROM_STAR) return;
+  if (starsDistance > STAR_DISTANCE_FROM_STAR) return;
   const { pos: pos1 } = star1;
   const { pos: pos2 } = star2;
   var gradient = gCtx.createLinearGradient(pos1.x, pos1.y, pos2.x, pos2.y);
