@@ -3,7 +3,9 @@ import { initStars, getStars, getStarsByDistanceAndPos } from './starService.js'
 let gCanvasEl = null;
 let gCtx = null;
 const FRAMERATE = Math.floor(1000 / 16);
-const STAR_COUNT = 100;
+
+const STAR_COUNT = calcStarCount();
+
 let STAR_DISTANCE_FROM_MOUSE;
 let STAR_DISTANCE_FROM_STAR;
 let gCurrMousePos = { x: 0, y: 0 }
@@ -11,6 +13,13 @@ let gIsMouseOverCanvas = false;
 let gTouchPositions = null;
 
 window.addEventListener('load', init);
+
+
+function calcStarCount() {
+  const pixelCount = innerHeight * innerWidth;
+  const starsPerPixel = 0.0005;
+  return pixelCount * starsPerPixel;
+}
 
 function init() {
   initGlobals();
